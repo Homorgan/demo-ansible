@@ -5,7 +5,7 @@ ansible_connection= network_cli
 eos-switches
 ios-switches
 
-[eos]
+[eos-switches]
 10.98.117.11
 
 [ios-switches]
