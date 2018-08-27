@@ -3,7 +3,10 @@ ansible_connection= network_cli
 
 [switches:children]
 eos
+ios-switches
 
 [eos]
 10.98.117.11
 
+[ios-switches]
+10.170.200.2
