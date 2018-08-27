@@ -1,0 +1,22 @@
+- name: "Demonstrate connecting to switches"
+  hosts: ios-switches
+  gather_facts: yes
+  tasks:
+    - name: Showing version of Switch (ios)
+      ios_command:
+        commands: show version
+    - name: Change Host name
+      ios_config:
+        lines:
+          - hostname Hostname
+    - name: Add Vlans to Switch
+      ios_vlan:
+        state: active
+        purge: yes
+        aggregate:
+          - { vlan_id: 1, name: default }
+          - { vlan_id: 2, name: vlan_2 }
+          - { vlan_id: 3, state: suspend }
+          - { vlan_id: 4000, name: new_vlan }
+          - { vlan_id: 250, name: vlan_250 }
+          - { vlan_id: 500, name: vlan_500 }

@@ -1,0 +1,16 @@
+- name: "Connecting to IOS switches"
+  hosts: ios-switches
+  gather_facts: yes
+  tasks:
+    - name: Showing Vlans of Switch (ios)
+      ios_command:
+        commands: show vlan brief
+      register: show_vlan
+
+#    - copy: content="{{ show_vlan | to_nice_json }}" dest="out/{{inventory_hostname}}_vlans.json"
+    - copy: content="{{ show_vlan.stdout[0] | parse_cli('./filter/vlan.yaml') }}" dest="out/{{inventory_hostname}}_vlan.json"
+#https://www.netnea.com/cms/2016/10/16/using-ansible-to-fetch-information-from-ios-devices/
+#https://docs.ansible.com/ansible/2.5/user_guide/playbooks_filters.html#network-cli-filters
+#https://github.com/network-automation/ansible-network-parsers
+#ansible-network-parsers/parsers/ios/ios_show_vlan_parser.yml
+# Use this parser to capture Vlans in json
