@@ -1,0 +1,9 @@
+[all:vars]
+ansible_connection= network_cli
+
+[switches:children]
+eos
+
+[eos]
+10.98.117.11
+

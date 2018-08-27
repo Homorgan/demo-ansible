@@ -1,0 +1,24 @@
+- name: "Demonstrate connecting to switches"
+  hosts: switches
+  gather_facts: yes
+  connection: network_cli
+  tasks:
+    - name: Showing version of Switch (eos)
+      eos_command:
+        commands: show version
+    - name: Change Host name
+      eos_config:
+        lines:
+          - hostname TFS-3
+    - name: Add Vlans to Switch
+      eos_vlan:
+        state: active
+        purge: yes
+        aggregate:
+          - { vlan_id: 1, name: default }
+          - { vlan_id: 2, name: TFS_Vlan2 }
+          - { vlan_id: 3, state: suspend }
+          - { vlan_id: 4000, name: new_vlan }
+          - { vlan_id: 250, name: vlan_250 }
+          - { vlan_id: 500, name: vlan_500 }
+          - { vlan_id: 51, name: vlan_50 }

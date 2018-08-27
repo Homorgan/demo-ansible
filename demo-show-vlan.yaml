@@ -1,0 +1,19 @@
+- name: "Connecting to switches: capture Vlans, save running conf, and backup conf"
+  hosts: switches
+  gather_facts: no
+  connection: network_cli
+  tasks:
+    - name: Showing vlan of Switch (eos)
+      eos_command:
+        commands: show vlan brief
+      register: show_vlan
+    - name: save running to startup when modified
+      eos_config:
+        save_when: modified
+    - name: Backup current switch config (eos)
+      eos_config:
+        backup: yes
+      register: eos_backup
+
+    - copy: content="{{ show_vlan.stdout[0] | parse_cli('./filter/vlan.yaml') }}" dest="out/{{inventory_hostname}}_vlan.json"
+#https://www.netnea.com/cms/2016/10/16/using-ansible-to-fetch-information-from-ios-devices/
