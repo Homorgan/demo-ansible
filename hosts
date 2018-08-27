@@ -2,7 +2,7 @@
 ansible_connection= network_cli
 
 [switches:children]
-eos
+eos-switches
 ios-switches
 
 [eos]
