@@ -1,5 +1,5 @@
 - name: "Demonstrate connecting to switches"
-  hosts: switches
+  hosts: eos-switches
   gather_facts: yes
   connection: network_cli
   tasks:

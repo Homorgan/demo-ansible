@@ -1,5 +1,5 @@
 - name: "Connecting to switches: capture Vlans, save running conf, and backup conf"
-  hosts: switches
+  hosts: eos-switches
   gather_facts: no
   connection: network_cli
   tasks:
