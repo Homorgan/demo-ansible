@@ -1,0 +1,14 @@
+- name: "Capturing IOS Facts"
+  hosts: ios_switches
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+    - name: Capture facts from IOS device and capture to to_nice_json information
+      ios_facts:
+      register: iosfacts_out
+
+  - copy: content="{{ iosfacts_out | to_nice_json }}" dest="out/{{inventory_hostname}}_iosfacts.json"
+
+
+#https://www.netnea.com/cms/2016/10/16/using-ansible-to-fetch-information-from-ios-devices/
