@@ -1,0 +1,21 @@
+- name: "Demonstrate connecting to switches"
+  hosts: eos-switches
+  gather_facts: yes
+
+  tasks:
+    ###
+    # Collect data
+    #
+    - name: Gather facts (eos)
+      eos_facts:
+#      become: yes
+#      become_method: enable
+      when: ansible_network_os == 'eos'
+      register: facts
+    - name: Display some facts
+      debug:
+      #  msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
+        msg: "The MAC is {{ansible_net_interfaces.Management1.macaddress}}"
+#    - debug: {{ facts.stdout[0] | to_nice_json}}
+#    - debug:
+#        var: facts

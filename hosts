@@ -6,7 +6,7 @@ eos-switches
 ios-switches
 
 [eos-switches]
-10.98.114.251
+192.168.1.10 ansible_hostname=eos.test
 10.98.114.253
 
 [ios-switches]
