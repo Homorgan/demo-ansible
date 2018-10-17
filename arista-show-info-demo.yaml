@@ -7,6 +7,10 @@
       eos_command:
         commands: show vlan brief
       register: show_vlan
+    - name: Change hostname
+      eos_config:
+      lines:
+            - hostname First-Energy
     - name: save running to startup when modified
       eos_config:
         save_when: modified

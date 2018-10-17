@@ -1,0 +1,40 @@
+! Command: show running-config
+! device: First-Energy (vEOS, EOS-4.20.1F)
+!
+! boot system flash:EOS.swi
+!
+transceiver qsfp default-mode 4x10G
+!
+hostname First-Energy
+!
+spanning-tree mode mstp
+!
+enable secret sha512 $6$MQpBIcx4Apm2fH87$CPne.q3zM/mjGXSXy5ccTr0e0HPj0Vwt2maQuoGEULlDGqTl069HWLJ3gEnQ9IyKlLAGWNlyr8JzDeB8NKGeL1
+no aaa root
+!
+username admin role network-admin secret sha512 $6$vboSHuMfVC6hQmgi$18LBbKhgE3RK1rNxAntSNPTkbeypEvMgam4YnrnXE8L9XleApdF1/tvE8WvyoOYxlNQgDns2HNbxs1e/O30t4/
+!
+vlan 2
+   name TFS_Vlan2
+!
+vlan 3
+   state suspend
+!
+vlan 51
+   name vlan_50
+!
+vlan 250
+   name vlan_250
+!
+vlan 500
+   name vlan_500
+!
+vlan 4000
+   name new_vlan
+!
+interface Management1
+   ip address 192.168.1.50/24
+!
+no ip routing
+!
+end
