@@ -1,0 +1,27 @@
+- name: "Capturing IOS Facts with Conditions"
+  hosts: ios-switches
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+    - name: Capture facts from IOS device
+      ios_facts:
+      register: iosfacts_out
+
+    - name: Uing lineinfile to print ansible_net_hostname to file using "when" Conditional ansible_net_model == "vEOS"
+      lineinfile:
+        dest: ./out/cisco-lineinfo.txt
+        line: "{{ansible_net_hostname}} is running IOS"
+        state: present
+        create: yes
+      when: ansible_net_model == "IOS"
+
+    - name: Using blockinfile to insert multiple lines
+      blockinfile:
+        dest: ./out/cisco-blockfile.txt
+        create: yes
+        block: |
+          "{{ansible_net_hostname}}, {{ansible_net_interfaces.Management1.ipv4.address}} is running vEOS"
+          "{{ansible_net_hostname}} is running {{ansible_net_version}}"
+
+#https://www.netnea.com/cms/2016/10/16/using-ansible-to-fetch-information-from-ios-devices/
