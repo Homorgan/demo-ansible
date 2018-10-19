@@ -23,5 +23,6 @@
         block: |
           "{{ansible_net_hostname}}, {{ansible_net_interfaces.Management1.ipv4.address}} is running vEOS"
           "{{ansible_net_hostname}} is running {{ansible_net_version}}"
+      when: ansible_net_model == "IOS"
 
 #https://www.netnea.com/cms/2016/10/16/using-ansible-to-fetch-information-from-ios-devices/
