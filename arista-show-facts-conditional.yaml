@@ -26,3 +26,4 @@
       when: ansible_net_model == "vEOS"
 
 #https://www.netnea.com/cms/2016/10/16/using-ansible-to-fetch-information-from-ios-devices/
+# To show the return "facts" from eos_facts, run ansible <eos_host ip> -m eos_facts
