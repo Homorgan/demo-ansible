@@ -8,7 +8,7 @@
       eos_facts:
       register: eosfacts_out
 
-    - name: Uing lineinfile to print ansible_net_hostname to file using "when" Conditional ansible_net_model == "vEOS"
+    - name: Using lineinfile to print ansible_net_hostname to file using "when" Conditional ansible_net_model == "vEOS"
       lineinfile:
         dest: ./out/lineinfo.txt
         line: "{{ansible_net_hostname}} is running vEOS"
@@ -19,6 +19,7 @@
     - name: Using blockinfile to insert multiple lines
       blockinfile:
         dest: ./out/blockfile.txt
+        state: present
         create: yes
         block: |
           "{{ansible_net_hostname}}, {{ansible_net_interfaces.Management1.ipv4.address}} is running vEOS"
